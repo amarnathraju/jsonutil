@@ -4,25 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON Utility</title>
-    <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435757825577995"
-    crossorigin="anonymous"></script>
-   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            height: 60px;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navigation-banner {
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            z-index: 999;
+            border-bottom: 1px solid #222;
+        }
+
+        .navigation-banner a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .navigation-banner a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        .container {
+            margin-top: 120px; /* Adjust for header + banner height */
+            display: flex;
+            flex-direction: row;
+            width: 90%;
+            max-width: 1200px;
+            gap: 10px;
+        }
+
+        .side-ad {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .main-content {
+            flex: 3;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .adsense {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Adjust the scroll position for fixed header and banner */
+        section {
+            scroll-margin-top: 120px; /* Combined height of header and banner */
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .side-ad {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to JSONUtil.com</h1>
-    <p>This is a placeholder site. Stay tuned for JSON utilities and tools!</p>
+    <header>
+        <h1>Welcome to JSONUtil.com</h1>
+    </header>
+    
+    <nav class="navigation-banner">
+        <a href="#validator">Validator</a>
+        <a href="#formatter">Formatter</a>
+        <a href="#minifier">Minifier</a>
+        <a href="#json-to-xml">JSON to XML</a>
+        <a href="#diff-tool">Diff Tool</a>
+    </nav>
 
-    <!-- AdSense Ad -->
-    <!-- JsonUtil-AddUnit -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-8435757825577995"
-        data-ad-slot="3623266458"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
+    <!-- Top Ad -->
+    <div class="adsense">
+        <!-- AdSense code -->
+    </div>
+
+    <div class="container">
+        <!-- Left Ad -->
+        <div class="side-ad">
+            <!-- AdSense code -->
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section id="validator">
+                <h2>JSON Validator</h2>
+                <textarea id="jsonInput" rows="10" placeholder="Enter JSON"></textarea>
+                <button onclick="validateJSON()">Validate JSON</button>
+                <p id="result"></p>
+            </section>
+
+            <div class="adsense">
+                <!-- AdSense code -->
+            </div>
+
+            <section id="formatter">
+                <h2>JSON Formatter</h2>
+                <textarea id="jsonFormatterInput" rows="10" placeholder="Enter JSON"></textarea>
+                <button onclick="formatJSON()">Format JSON</button>
+                <h3>Formatted JSON:</h3>
+                <pre id="formattedJSON"></pre>
+            </section>
+
+            <section id="minifier">
+                <h2>JSON Minifier</h2>
+                <textarea id="jsonMinifierInput" rows="10" placeholder="Enter JSON"></textarea>
+                <button onclick="minifyJSON()">Minify JSON</button>
+                <h3>Minified JSON:</h3>
+                <pre id="minifiedJSON"></pre>
+            </section>
+
+            <section id="json-to-xml">
+                <h2>JSON to XML Converter</h2>
+                <textarea id="jsonToXMLInput" rows="10" placeholder="Enter JSON"></textarea>
+                <button onclick="convertJSONToXML()">Convert to XML</button>
+                <h3>XML Output:</h3>
+                <pre id="xmlOutput"></pre>
+            </section>
+
+            <section id="diff-tool">
+                <h2>JSON Diff Tool</h2>
+                <textarea id="jsonDiffInput1" rows="5" placeholder="Enter first JSON"></textarea>
+                <textarea id="jsonDiffInput2" rows="5" placeholder="Enter second JSON"></textarea>
+                <button onclick="diffJSON()">Compare JSON</button>
+                <h3>JSON Differences:</h3>
+                <pre id="jsonDiffOutput"></pre>
+            </section>
+        </div>
+
+        <!-- Right Ad -->
+        <div class="side-ad">
+            <!-- AdSense code -->
+        </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="adsense">
+        <!-- AdSense code -->
+    </div>
+
+    <footer>
+        &copy; 2024 JSONUtil.com. All Rights Reserved.
+    </footer>
+
     <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>    </div>
+        // Add necessary JavaScript functions here
+    </script>
 </body>
 </html>

@@ -80,6 +80,20 @@
             text-align: center;
         }
 
+        .copyButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .generatedText {
+            background: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            border-radius: 5px;
+        }
+
         /* Adjust the scroll position for fixed header and banner */
         section {
             scroll-margin-top: 120px;
@@ -123,6 +137,57 @@
                 display: none;
             }
         }
+
+        /* Toast notification styling */
+        #toast {
+            position: fixed;
+            top: 100px;
+            /* Adjust to account for both header (60px) and navigation bar (40px) */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0 0 5px 5px;
+            font-size: 16px;
+            z-index: 1001;
+            /* Ensure it appears above other elements */
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #toast.show {
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #toast.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+
+        .output-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .output-container button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 
@@ -139,6 +204,8 @@
         <a href="#diff-tool">Diff Tool</a>
     </nav>
 
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none;">Copied to clipboard!</div>
     <div class="container">
         <!-- Left Ad -->
         <div class="side-ad">
@@ -153,8 +220,10 @@
             </script>
         </div>
 
+
         <!-- Main Content -->
         <div class="main-content">
+
             <section id="validator">
                 <h2>JSON Validator</h2>
                 <textarea id="jsonInput" rows="10" placeholder="Enter JSON"></textarea>
@@ -167,7 +236,12 @@
                 <textarea id="jsonFormatterInput" rows="10" placeholder="Enter JSON"></textarea>
                 <button onclick="formatJSON()">Format JSON</button>
                 <h3>Formatted JSON:</h3>
-                <pre id="formattedJSON"></pre>
+                <div style="position: relative;">
+                    <!-- Copy Button -->
+                    <button class="copyButton" onclick="copyToClipboard('formattedJSON')">Copy</button>
+                    <pre id="formattedJSON" class="generatedText">
+                    </pre>
+                </div>
             </section>
 
             <section id="minifier">
@@ -175,7 +249,11 @@
                 <textarea id="jsonMinifierInput" rows="10" placeholder="Enter JSON"></textarea>
                 <button onclick="minifyJSON()">Minify JSON</button>
                 <h3>Minified JSON:</h3>
-                <pre id="minifiedJSON"></pre>
+                <div style="position: relative;">
+                    <button onclick="copyToClipboard('minifiedJSON')" class="copyButton">Copy</button>
+                    <pre id="minifiedJSON" class="generatedText">
+        </pre>
+                </div>
             </section>
 
             <section id="json-to-xml">
@@ -183,7 +261,10 @@
                 <textarea id="jsonToXMLInput" rows="10" placeholder="Enter JSON"></textarea>
                 <button onclick="convertJSONToXML()">Convert to XML</button>
                 <h3>XML Output:</h3>
-                <pre id="xmlOutput"></pre>
+                <div style="position: relative;">
+                    <button class="copyButton" onclick="copyToClipboard('xmlOutput')">Copy</button>
+                    <pre id="xmlOutput" class="generatedText"></pre>
+                </div>
             </section>
 
             <section id="diff-tool">
@@ -192,7 +273,10 @@
                 <textarea id="jsonDiffInput2" rows="5" placeholder="Enter second JSON"></textarea>
                 <button onclick="diffJSON()">Compare JSON</button>
                 <h3>JSON Differences:</h3>
-                <pre id="jsonDiffOutput"></pre>
+                <div style="position: relative;">
+                    <button class="copyButton" onclick="copyToClipboard('jsonDiffOutput')">Copy</button>
+                    <pre id="jsonDiffOutput" class="generatedText"></pre>
+                </div>
             </section>
         </div>
 

@@ -107,3 +107,41 @@ function findDifferences(obj1, obj2) {
     }
     return diff;
 }
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    const text = element.innerText || element.textContent;
+
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            showToast("Copied to clipboard!");
+        })
+        .catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+
+    // Dynamically calculate the combined height of the header and navigation bar
+    const headerHeight = document.querySelector('header').offsetHeight;
+    const navBarHeight = document.querySelector('.navigation-banner').offsetHeight;
+    const totalOffset = headerHeight + navBarHeight;
+
+    // Apply dynamic positioning
+    toast.style.top = `${totalOffset}px`;
+
+    // Show the toast with animation
+    toast.style.display = "block";
+    toast.className = "show";
+
+    // Remove the "show" class after 2 seconds to hide the toast
+    setTimeout(() => {
+        toast.className = "hide";
+        setTimeout(() => {
+            toast.style.display = "none";
+        }, 500);
+    }, 2000);
+}
+

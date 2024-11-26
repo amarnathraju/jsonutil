@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435757825577995"
         crossorigin="anonymous"></script>
-    <title>JSON Utility - Validate, Format, Minify JSON and other JSON tools</title>
+    <title>JSON Utility - Validate, Format, Minify JSON and Other JSON Tools</title>
     <meta name="description"
         content="Use JSONUtil.com to validate, format, and minify your JSON effortlessly. A simple and efficient online JSON tool for developers.">
     <meta name="keywords"
@@ -17,6 +17,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         header {
@@ -24,9 +25,9 @@
             color: white;
             padding: 10px 20px;
             text-align: center;
-            width: 100%;
             position: fixed;
             top: 0;
+            width: 100%;
             height: 60px;
             z-index: 1000;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -57,32 +58,26 @@
         }
 
         .container {
-            margin-top: 120px;
-            /* Adjust for header + banner height */
             display: flex;
-            flex-direction: row;
-            width: 90%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 140px;
+            /* Adjust for header + navigation */
+            padding: 20px;
+            width: 100%;
             max-width: 1200px;
-            gap: 10px;
-        }
-
-        .side-ad {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
         }
 
         .main-content {
-            flex: 3;
+            width: 100%;
+            max-width: 800px;
             padding: 20px;
             background-color: #f9f9f9;
             border: 1px solid #ccc;
             border-radius: 8px;
-        }
-
-        .adsense {
-            margin: 20px 0;
-            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .copyButton {
@@ -99,11 +94,12 @@
             border-radius: 5px;
         }
 
-        /* Adjust the scroll position for fixed header and banner */
+
         section {
-            scroll-margin-top: 120px;
-            /* Combined height of header and banner */
+            scroll-margin-top: 140px;
+            /* Total height of header (60px) + navbar (80px) */
             margin-bottom: 30px;
+            /* Add some spacing between sections */
         }
 
         textarea {
@@ -125,23 +121,54 @@
             background-color: #45a049;
         }
 
+        .output-container {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .output-container button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
         footer {
             background-color: #333;
             color: white;
             text-align: center;
             padding: 10px 0;
-            width: 100%;
+            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
+                padding: 10px;
             }
 
-            .side-ad {
-                display: none;
+            .main-content {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            textarea {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
             }
         }
+
 
         /* Toast notification styling */
         #toast {
@@ -172,27 +199,6 @@
             opacity: 0;
             transform: translateX(-50%) translateY(-20px);
         }
-
-        .output-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .output-container button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-        }
-
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border: 1px solid #ddd;
-            font-family: monospace;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
     </style>
 </head>
 
@@ -212,77 +218,71 @@
     <!-- Toast Notification -->
     <div id="toast" style="display: none;">Copied to clipboard!</div>
     <div class="container">
-        
-
-
-        <!-- Main Content -->
         <div class="main-content">
-
             <section id="validator">
                 <h2>JSON Validator</h2>
-                <textarea id="jsonInput" rows="10" placeholder="Enter JSON"></textarea>
+                <p>Check if your JSON is valid. Paste your JSON below and click "Validate JSON".</p>
+                <textarea id="jsonInput" rows="8" placeholder="Enter JSON"></textarea>
                 <button onclick="validateJSON()">Validate JSON</button>
                 <p id="result"></p>
             </section>
 
             <section id="formatter">
                 <h2>JSON Formatter</h2>
-                <textarea id="jsonFormatterInput" rows="10" placeholder="Enter JSON"></textarea>
+                <p>Paste your JSON below to format it in a readable way.</p>
+                <textarea id="jsonFormatterInput" rows="8" placeholder="Enter JSON"></textarea>
                 <button onclick="formatJSON()">Format JSON</button>
                 <h3>Formatted JSON:</h3>
-                <div style="position: relative;">
-                    <!-- Copy Button -->
+                <div class="output-container">
                     <button class="copyButton" onclick="copyToClipboard('formattedJSON')">Copy</button>
-                    <pre id="formattedJSON" class="generatedText">
-                    </pre>
+                    <pre class="generatedText" id="formattedJSON"></pre>
                 </div>
             </section>
 
             <section id="minifier">
                 <h2>JSON Minifier</h2>
-                <textarea id="jsonMinifierInput" rows="10" placeholder="Enter JSON"></textarea>
+                <p>Paste your JSON below to minify it for reduced size.</p>
+                <textarea id="jsonMinifierInput" rows="8" placeholder="Enter JSON"></textarea>
                 <button onclick="minifyJSON()">Minify JSON</button>
                 <h3>Minified JSON:</h3>
-                <div style="position: relative;">
-                    <button onclick="copyToClipboard('minifiedJSON')" class="copyButton">Copy</button>
-                    <pre id="minifiedJSON" class="generatedText">
-        </pre>
+                <div class="output-container">
+                    <button class="copyButton" onclick="copyToClipboard('minifiedJSON')">Copy</button>
+                    <pre class="generatedText" id="minifiedJSON"></pre>
                 </div>
             </section>
 
             <section id="json-to-xml">
                 <h2>JSON to XML Converter</h2>
-                <textarea id="jsonToXMLInput" rows="10" placeholder="Enter JSON"></textarea>
+                <p>Convert JSON to XML format for integration with other tools.</p>
+                <textarea id="jsonToXMLInput" rows="8" placeholder="Enter JSON"></textarea>
                 <button onclick="convertJSONToXML()">Convert to XML</button>
                 <h3>XML Output:</h3>
-                <div style="position: relative;">
+                <div class="output-container">
                     <button class="copyButton" onclick="copyToClipboard('xmlOutput')">Copy</button>
-                    <pre id="xmlOutput" class="generatedText"></pre>
+                    <pre class="generatedText" id="xmlOutput"></pre>
                 </div>
             </section>
 
             <section id="diff-tool">
                 <h2>JSON Diff Tool</h2>
+                <p>Compare two JSON objects to find differences.</p>
                 <textarea id="jsonDiffInput1" rows="5" placeholder="Enter first JSON"></textarea>
                 <textarea id="jsonDiffInput2" rows="5" placeholder="Enter second JSON"></textarea>
                 <button onclick="diffJSON()">Compare JSON</button>
                 <h3>JSON Differences:</h3>
-                <div style="position: relative;">
+                <div class="output-container">
                     <button class="copyButton" onclick="copyToClipboard('jsonDiffOutput')">Copy</button>
-                    <pre id="jsonDiffOutput" class="generatedText"></pre>
+                    <pre class="generatedText" id="jsonDiffOutput"></pre>
                 </div>
             </section>
         </div>
-
     </div>
 
     <footer>
         &copy; 2024 JSONUtil.com. All Rights Reserved.
     </footer>
 
-    <script src="js/main.js">
-
-    </script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

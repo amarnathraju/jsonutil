@@ -1,3 +1,9 @@
+// JavaScript to obfuscate email
+const emailUser = "support";
+const emailDomain = "jsonutil.com";
+const emailLink = `<a href="mailto:${emailUser}@${emailDomain}">${emailUser}@${emailDomain}</a>`;
+document.getElementById("contact-email").innerHTML = emailLink;
+
 function validateJSON() {
     const jsonInput = document.getElementById('jsonInput').value;
     const resultElement = document.getElementById('result');
@@ -169,17 +175,17 @@ function showToast(message) {
     }, 2000);
 }
 
-    // Show button on scroll
-    window.onscroll = function() {
-        const button = document.getElementById('scrollToTop');
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            button.style.display = 'block';
-        } else {
-            button.style.display = 'none';
-        }
-    };
-
-    // Scroll to top function
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+// Show button on scroll
+window.onscroll = function () {
+    const button = document.getElementById('scrollToTop');
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
     }
+};
+
+// Scroll to top function
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}

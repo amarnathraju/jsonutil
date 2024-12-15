@@ -40,39 +40,63 @@ function minifyJSON() {
 }
 
 function convertJSONToXML() {
-    const jsonToXMLInput = document.getElementById('jsonToXMLInput').value;
-    const xmlOutputElement = document.getElementById('xmlOutput');
-    try {
-        const parsedJSON = JSON.parse(jsonToXMLInput);
-        const xml = jsonToXML(parsedJSON);
-        xmlOutputElement.textContent = xml;
-        xmlOutputElement.style.color = "black";
-    } catch (e) {
-        xmlOutputElement.textContent = "Invalid JSON: " + e.message;
-        xmlOutputElement.style.color = "red";
-    }
-}
+    const jsonInput = document.getElementById("jsonToXMLInput").value;
+    const outputElement = document.getElementById("xmlOutput");
 
-function jsonToXML(json) {
-    let xml = '';
-    for (let prop in json) {
-        if (json.hasOwnProperty(prop)) {
-            if (Array.isArray(json[prop])) {
-                for (let arrayElem of json[prop]) {
-                    xml += `<${prop}>`;
-                    xml += jsonToXML(arrayElem);
-                    xml += `</${prop}>`;
+    try {
+        const json = JSON.parse(jsonInput);
+
+        // Recursive function to convert JSON to XML
+        function jsonToXML(obj, rootName = "root") {
+            let xml = `<${rootName}>`;
+
+            for (let key in obj) {
+                if (Array.isArray(obj[key])) {
+                    // Properly handle arrays
+                    obj[key].forEach(item => {
+                        if (typeof item === "object") {
+                            // If array item is an object, process it recursively
+                            xml += jsonToXML(item, key);
+                        } else {
+                            // If array item is a primitive (string, number, boolean), wrap it in <item> tags
+                            xml += `<item>${escapeXML(item)}</item>`;
+                        }
+                    });
+                } else if (typeof obj[key] === "object" && obj[key] !== null) {
+                    // Handle nested objects
+                    xml += jsonToXML(obj[key], key);
+                } else {
+                    // Handle primitive values (strings, numbers, booleans)
+                    xml += `<${key}>${escapeXML(obj[key])}</${key}>`;
                 }
-            } else if (typeof json[prop] === 'object') {
-                xml += `<${prop}>`;
-                xml += jsonToXML(json[prop]);
-                xml += `</${prop}>`;
-            } else {
-                xml += `<${prop}>${json[prop]}</${prop}>`;
             }
+
+            xml += `</${rootName}>`;
+            return xml;
         }
+
+        // Function to escape special XML characters
+        function escapeXML(value) {
+            if (typeof value !== "string") return value;
+            return value
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&apos;");
+        }
+
+        // Generate XML and escape it for browser display
+        const xmlOutput = jsonToXML(json);
+        const escapedXML = xmlOutput
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+        outputElement.innerHTML = escapedXML;
+    } catch (error) {
+        // Display error message if JSON parsing fails
+        outputElement.innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
     }
-    return xml;
 }
 
 function diffJSON() {
@@ -145,3 +169,17 @@ function showToast(message) {
     }, 2000);
 }
 
+    // Show button on scroll
+    window.onscroll = function() {
+        const button = document.getElementById('scrollToTop');
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            button.style.display = 'block';
+        } else {
+            button.style.display = 'none';
+        }
+    };
+
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }

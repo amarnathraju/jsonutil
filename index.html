@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8435757825577995"
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script>window.msAdsQueue = window.msAdsQueue || [];</script>
-    <script async src="https://adsdk.microsoft.com/mmnow/sdk.js?siteId=365378&publisherId=254206508" crossorigin="anonymous"></script>
-    
+    <script async src="https://adsdk.microsoft.com/mmnow/sdk.js?siteId=365378&publisherId=254206508"
+        crossorigin="anonymous"></script>
+
     <!-- Canonical Tag -->
     <link rel="canonical" href="https://jsonutil.com" />
 
@@ -219,6 +220,8 @@
         <a href="#minifier">Minifier</a>
         <a href="#json-to-xml">JSON to XML</a>
         <a href="#diff-tool">Diff Tool</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
     </nav>
 
     <!-- Toast Notification -->
@@ -227,16 +230,74 @@
         <div class="main-content">
             <section id="validator">
                 <h2>JSON Validator</h2>
-                <p>Check if your JSON is valid. Paste your JSON below and click "Validate JSON".</p>
-                <textarea id="jsonInput" rows="8" placeholder="Enter JSON"></textarea>
+                <p>
+                    The JSON Validator helps you quickly check the validity of your JSON data.
+                    It is designed for developers working on APIs, configurations, or data handling.
+                    Simply paste your JSON code below and click "Validate JSON" to get immediate feedback.
+                </p>
+                <h3>Why Use the JSON Validator?</h3>
+                <ul>
+                    <li>Save time by catching syntax errors instantly.</li>
+                    <li>Ensure your JSON is compatible with APIs and databases.</li>
+                    <li>Debug issues with clear error messages and fixes.</li>
+                </ul>
+                <h3>Examples:</h3>
+                <h4>Valid JSON:</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 25,
+                "isActive": true,
+                "languages": ["English", "Spanish"]
+            }
+                </pre>
+                <h4>Invalid JSON:</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 25,
+                "isActive": true,
+                "languages": ["English", "Spanish",
+            }
+                </pre>
+                <p>The invalid example above has a missing closing bracket for the "languages" array.</p>
+                <textarea id="jsonInput" rows="8" placeholder="Enter your JSON here..."></textarea>
                 <button onclick="validateJSON()">Validate JSON</button>
                 <p id="result"></p>
             </section>
 
             <section id="formatter">
                 <h2>JSON Formatter</h2>
-                <p>Paste your JSON below to format it in a readable way.</p>
-                <textarea id="jsonFormatterInput" rows="8" placeholder="Enter JSON"></textarea>
+                <p>
+                    The JSON Formatter allows you to convert compact or poorly formatted JSON into a readable, indented
+                    structure.
+                    This tool is essential for developers working on debugging or understanding complex JSON data
+                    structures.
+                </p>
+                <h3>Why Use the JSON Formatter?</h3>
+                <ul>
+                    <li>Improve readability by formatting JSON with proper indentation.</li>
+                    <li>Quickly identify nested structures or data relationships.</li>
+                    <li>Work efficiently with JSON during debugging or integration.</li>
+                </ul>
+                <h3>Example:</h3>
+                <h4>Input (Unformatted JSON):</h4>
+                <pre>
+            {"name":"Alice","age":25,"skills":["JavaScript","Python"],"isActive":true}
+                </pre>
+                <h4>Output (Formatted JSON):</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 25,
+                "skills": [
+                    "JavaScript",
+                    "Python"
+                ],
+                "isActive": true
+            }
+                </pre>
+                <textarea id="jsonFormatterInput" rows="8" placeholder="Enter your JSON here..."></textarea>
                 <button onclick="formatJSON()">Format JSON</button>
                 <h3>Formatted JSON:</h3>
                 <div class="output-container">
@@ -247,8 +308,34 @@
 
             <section id="minifier">
                 <h2>JSON Minifier</h2>
-                <p>Paste your JSON below to minify it for reduced size.</p>
-                <textarea id="jsonMinifierInput" rows="8" placeholder="Enter JSON"></textarea>
+                <p>
+                    The JSON Minifier compresses your JSON by removing unnecessary spaces, line breaks, and indentation.
+                    This is especially useful for reducing the size of JSON files for API requests or storage.
+                </p>
+                <h3>Why Use the JSON Minifier?</h3>
+                <ul>
+                    <li>Reduce JSON size for faster API responses and better performance.</li>
+                    <li>Minify JSON before embedding it into HTML or JavaScript.</li>
+                    <li>Efficiently handle large JSON datasets.</li>
+                </ul>
+                <h3>Example:</h3>
+                <h4>Input (Formatted JSON):</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 25,
+                "skills": [
+                    "JavaScript",
+                    "Python"
+                ],
+                "isActive": true
+            }
+                </pre>
+                <h4>Output (Minified JSON):</h4>
+                <pre>
+            {"name":"Alice","age":25,"skills":["JavaScript","Python"],"isActive":true}
+                </pre>
+                <textarea id="jsonMinifierInput" rows="8" placeholder="Enter your JSON here..."></textarea>
                 <button onclick="minifyJSON()">Minify JSON</button>
                 <h3>Minified JSON:</h3>
                 <div class="output-container">
@@ -259,19 +346,95 @@
 
             <section id="json-to-xml">
                 <h2>JSON to XML Converter</h2>
-                <p>Convert JSON to XML format for integration with other tools.</p>
-                <textarea id="jsonToXMLInput" rows="8" placeholder="Enter JSON"></textarea>
+                <p>
+                    Convert JSON to XML effortlessly with our converter. This tool is ideal for integrating JSON data
+                    into systems that require XML formats, such as older APIs or data interchange protocols.
+                </p>
+                <h3>Why Use the JSON to XML Converter?</h3>
+                <ul>
+                    <li>Easily transform JSON objects into XML format.</li>
+                    <li>Enable compatibility with legacy systems requiring XML.</li>
+                    <li>Simplify workflows involving mixed data formats.</li>
+                </ul>
+                <h3>Example:</h3>
+                <h4>Input (JSON):</h4>
+                <pre style="white-space: pre-wrap; word-wrap: break-word; background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;">
+            {
+                "name": "Alice",
+                "age": 25,
+                "skills": ["JavaScript", "Python"]
+            }
+                </pre>
+                <h4>Output (XML):</h4>
+                <pre style="white-space: pre-wrap; word-wrap: break-word; background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;">&lt;root&gt;
+                &lt;name&gt;Alice&lt;/name&gt;
+                &lt;age&gt;25&lt;/age&gt;
+                &lt;skills&gt;
+                    &lt;item&gt;JavaScript&lt;/item&gt;
+                    &lt;item&gt;Python&lt;/item&gt;
+                &lt;/skills&gt;
+            &lt;/root&gt;
+                </pre>
+                <textarea id="jsonToXMLInput" rows="8" placeholder="Enter your JSON here..."></textarea>
                 <button onclick="convertJSONToXML()">Convert to XML</button>
                 <h3>XML Output:</h3>
                 <div class="output-container">
                     <button class="copyButton" onclick="copyToClipboard('xmlOutput')">Copy</button>
-                    <pre class="generatedText" id="xmlOutput"></pre>
+                    <pre class="generatedText" id="xmlOutput" style="white-space: pre-wrap;"></pre>
                 </div>
             </section>
-
+                        
             <section id="diff-tool">
                 <h2>JSON Diff Tool</h2>
-                <p>Compare two JSON objects to find differences.</p>
+                <p>
+                    Compare two JSON objects to identify differences. This tool is perfect for debugging, version
+                    control, or
+                    ensuring consistency in data structures.
+                </p>
+                <h3>Why Use the JSON Diff Tool?</h3>
+                <ul>
+                    <li>Quickly identify differences between two JSON objects.</li>
+                    <li>Validate changes or updates in JSON data.</li>
+                    <li>Streamline debugging and version control workflows.</li>
+                </ul>
+                <h3>Example:</h3>
+                <h4>Input JSON 1:</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 25,
+                "skills": ["JavaScript", "Python"]
+            }
+                </pre>
+                <h4>Input JSON 2:</h4>
+                <pre>
+            {
+                "name": "Alice",
+                "age": 26,
+                "skills": ["JavaScript", "Go"]
+            }
+                </pre>
+                <h4>Output (Differences):</h4>
+                <pre>
+                    {
+                        "age": {
+                            "type": "changed",
+                            "from": 25,
+                            "to": 26
+                        },
+                        "skills": {
+                            "type": "changed",
+                            "from": [
+                                "JavaScript",
+                                "Python"
+                            ],
+                            "to": [
+                                "JavaScript",
+                                "Go"
+                            ]
+                        }
+                    }
+                </pre>
                 <textarea id="jsonDiffInput1" rows="5" placeholder="Enter first JSON"></textarea>
                 <textarea id="jsonDiffInput2" rows="5" placeholder="Enter second JSON"></textarea>
                 <button onclick="diffJSON()">Compare JSON</button>
@@ -279,14 +442,48 @@
                 <div class="output-container">
                     <button class="copyButton" onclick="copyToClipboard('jsonDiffOutput')">Copy</button>
                     <pre class="generatedText" id="jsonDiffOutput"></pre>
+
                 </div>
             </section>
+
         </div>
     </div>
 
+    <section id="about-us" style="margin-top: 40px; text-align: center;">
+        <h2>About JSONUtil.com</h2>
+        <p>
+            JSONUtil.com was created to provide fast, reliable, and easy-to-use JSON tools for developers and data
+            enthusiasts.
+            Our platform is entirely client-side, ensuring your data remains private and secure.
+        </p>
+        <p>
+            Whether you're validating, formatting, or converting JSON, our tools are designed to save you time and
+            effort.
+        </p>
+    </section>
+
+
     <footer>
         &copy; 2024 JSONUtil.com. All Rights Reserved.
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-of-use.html">Terms of Use</a>
     </footer>
+
+    <button id="scrollToTop" onclick="scrollToTop()" style="
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    display: none; 
+    padding: 10px 15px; 
+    font-size: 14px; 
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;">
+        ↑ Top
+    </button>
+
 
     <script src="js/main.js"></script>
 </body>

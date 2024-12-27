@@ -89,7 +89,7 @@
 
         .container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
             margin-top: 140px;
@@ -100,6 +100,7 @@
         }
 
         .main-content {
+            flex:1;
             width: 100%;
             max-width: 800px;
             padding: 20px;
@@ -108,6 +109,16 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+        }
+        .sidebar {
+            width: 300px;
+            margin: 0 10px;
+            display: none; /* Default to hidden for smaller screens */
+        }
+
+        .ad-unit {
+            margin: 10px 0;
+            text-align: center;
         }
 
         .copyButton {
@@ -219,6 +230,12 @@
             }
         }
 
+        @media (min-width: 1200px) {
+            .sidebar {
+                display: block; /* Show sidebar ads for larger screens */
+            }
+        }
+
 
         /* Toast notification styling */
         #toast {
@@ -257,6 +274,19 @@
         <h1>Welcome to JSONUtil.com</h1>
     </header>
 
+    <nav class="navigation-banner">
+        <a href="#validator">Validator</a>
+        <a href="#formatter">Formatter</a>
+        <a href="#minifier">Minifier</a>
+        <a href="#json-to-xml">JSON to XML</a>
+        <a href="#diff-tool">Diff Tool</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none;">Copied to clipboard!</div>
+    
     <!-- Top Ad Placement -->
     <!-- <div class="ad-unit" style="margin: 10px auto; text-align: center;">
         <script>
@@ -272,19 +302,30 @@
             });
     });
     </script>
-    <nav class="navigation-banner">
-        <a href="#validator">Validator</a>
-        <a href="#formatter">Formatter</a>
-        <a href="#minifier">Minifier</a>
-        <a href="#json-to-xml">JSON to XML</a>
-        <a href="#diff-tool">Diff Tool</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-use.html">Terms of Use</a>
-    </nav>
-
-    <!-- Toast Notification -->
-    <div id="toast" style="display: none;">Copied to clipboard!</div>
     <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- <div class="ad-unit">
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+            <!-- <div class="ad-unit">
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+            <div id="1079560242"class="ad-unit"></div>
+            <script>
+            window.msAdsQueue.push(function(){
+                window.mmnow.render({
+                adUnitId: 1079560242,
+                elementId: 1079560242
+                });
+            });
+            </script>
+        </div>
+        
         <div class="main-content">
             <section id="validator">
                 <h2>JSON Validator</h2>
@@ -521,6 +562,28 @@
                 </div>
             </section>
 
+        </div>
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <!-- <div class="ad-unit">
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="ad-unit">
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+            <div id="1079560242" class="ad-unit"></div>
+            <script>
+            window.msAdsQueue.push(function(){
+                window.mmnow.render({
+                adUnitId: 1079560242,
+                elementId: 1079560242
+                });
+            });
+            </script>
         </div>
     </div>
 

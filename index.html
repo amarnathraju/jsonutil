@@ -97,6 +97,7 @@
             padding: 20px;
             width: 100%;
             max-width: 1200px;
+            position: relative;
         }
 
         .main-content {
@@ -110,15 +111,29 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-        .sidebar {
-            width: 300px;
-            margin: 0 10px;
-            display: none; /* Default to hidden for smaller screens */
+        
+
+        .sidebar-ad {
+            position: fixed;
+            top: 140px;
+            width: 120px;
+            /* Leaner width */
+        }
+
+        .sidebar-left {
+            left: 10px;
+        }
+
+        .sidebar-right {
+            right: 10px;
         }
 
         .ad-unit {
             margin: 10px 0;
             text-align: center;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 5px;
         }
 
         .copyButton {
@@ -231,8 +246,8 @@
         }
 
         @media (min-width: 1200px) {
-            .sidebar {
-                display: block; /* Show sidebar ads for larger screens */
+            .sidebar-ad {
+                display: none;
             }
         }
 
@@ -293,7 +308,7 @@
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div> -->
-    <div id="78183881"class="ad-unit" style="margin: 10px auto; text-align: center;"></div>
+    <!-- <div id="78183881"class="ad-unit" style="margin: 10px auto; text-align: center;"></div>
     <script>
         window.msAdsQueue.push(function(){
             window.mmnow.render({
@@ -301,10 +316,10 @@
             elementId: 78183881
             });
     });
-    </script>
+    </script> -->
     <div class="container">
         <!-- Left Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar-ad sidebar-left">
             <!-- <div class="ad-unit">
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -564,7 +579,7 @@
 
         </div>
         <!-- Right Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar-ad sidebar-right">
             <!-- <div class="ad-unit">
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});

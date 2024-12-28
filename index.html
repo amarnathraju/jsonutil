@@ -63,7 +63,7 @@
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .navigation-banner {
+        nav.navigation-banner {
             background-color: #333;
             text-align: center;
             padding: 10px 0;
@@ -87,23 +87,48 @@
             border-radius: 5px;
         }
 
+        .privacy-notice {
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            padding: 15px;
+            margin: 120px auto 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 800px;
+            font-size: 16px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .privacy-notice a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .privacy-notice a:hover {
+            text-decoration: underline;
+        }
+
         .container {
             display: flex;
-            flex-direction: row;
-            align-items: center;
             justify-content: center;
-            margin-top: 140px;
-            /* Adjust for header + navigation */
+            align-items: flex-start;
             padding: 20px;
-            width: 100%;
+            width: calc(100% - 320px);
+            /* Reserve space for the sidebars */
             max-width: 1200px;
+            margin: 0 auto;
             position: relative;
         }
 
+
         .main-content {
-            flex:1;
-            width: 100%;
+            flex: 1;
+            margin: 0 160px;
+            /* Add margins to account for sidebar widths */
             max-width: 800px;
+            min-width: 400px;
             padding: 20px;
             background-color: #f9f9f9;
             border: 1px solid #ccc;
@@ -111,22 +136,28 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-        
 
         .sidebar-ad {
             position: fixed;
             top: 140px;
+            /* Adjust to align with the content */
             width: 160px;
-            /* Leaner width */
+            /* Fixed width for sidebars */
+            height: calc(100vh - 140px);
+            /* Full height minus header and nav */
+            background-color: #f4f4f4;
+            /* Optional background color for testing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar-left {
-            left: 10px;
+            left: 0;
         }
 
         .sidebar-right {
-            right: 10px;
+            right: 0;
         }
+
 
         .ad-unit {
             margin: 10px 0;
@@ -151,12 +182,9 @@
             border-radius: 5px;
         }
 
-
         section {
             scroll-margin-top: 140px;
-            /* Total height of header (60px) + navbar (80px) */
             margin-bottom: 30px;
-            /* Add some spacing between sections */
         }
 
         textarea {
@@ -201,9 +229,7 @@
 
         footer {
             background-color: #333;
-            /* Dark background */
             color: white;
-            /* White text for contrast */
             text-align: center;
             padding: 10px 0;
             font-size: 14px;
@@ -211,7 +237,6 @@
 
         footer a.footer-link {
             color: #4CAF50;
-            /* Make links green for visibility */
             text-decoration: none;
             margin: 0 5px;
             font-weight: bold;
@@ -219,22 +244,26 @@
 
         footer a.footer-link:hover {
             text-decoration: underline;
-            /* Add underline on hover for better UX */
         }
 
         footer a.footer-link:visited {
             color: #3a9a45;
-            /* Slightly darker green for visited links */
         }
 
         @media (max-width: 768px) {
             .container {
+                flex-direction: column;
+                align-items: center;
                 padding: 10px;
             }
 
             .main-content {
                 max-width: 100%;
                 padding: 15px;
+            }
+
+            .sidebar-ad {
+                display: none;
             }
 
             textarea {
@@ -246,9 +275,19 @@
             }
         }
 
-        @media (min-width: 600px) {
-            .sidebar-ad {
-                display: none;
+        @media (max-width: 600px) {
+            .privacy-notice {
+                margin: 120px auto 20px;
+            }
+
+            .main-content {
+                margin: 0 auto;
+            }
+
+            #toast {
+                top: 80px;
+                font-size: 14px;
+                padding: 8px 15px;
             }
         }
 
@@ -256,7 +295,6 @@
         #toast {
             position: fixed;
             top: 100px;
-            /* Adjust to account for both header (60px) and navigation bar (40px) */
             left: 50%;
             transform: translateX(-50%);
             background-color: #4CAF50;
@@ -265,7 +303,6 @@
             border-radius: 0 0 5px 5px;
             font-size: 16px;
             z-index: 1001;
-            /* Ensure it appears above other elements */
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -299,9 +336,14 @@
         <a href="terms-of-use.html">Terms of Use</a>
     </nav>
 
+    <div class="privacy-notice">
+        <p>At JSONUtil.com, your data stays private! All processing happens entirely on your device—no information is
+            sent to our servers. <a href="privacy-policy.html">Learn more</a>.</p>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" style="display: none;">Copied to clipboard!</div>
-    
+
     <!-- Top Ad Placement -->
     <!-- <div class="ad-unit" style="margin: 10px auto; text-align: center;">
         <script>
@@ -330,17 +372,17 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div> -->
-            <div id="1079560242"class="ad-unit"></div>
+            <div id="1079560242" class="ad-unit"></div>
             <script>
-            window.msAdsQueue.push(function(){
-                window.mmnow.render({
-                adUnitId: 1079560242,
-                elementId: 1079560242
+                window.msAdsQueue.push(function () {
+                    window.mmnow.render({
+                        adUnitId: 1079560242,
+                        elementId: 1079560242
+                    });
                 });
-            });
             </script>
         </div>
-        
+
         <div class="main-content">
             <section id="validator">
                 <h2>JSON Validator</h2>
@@ -387,12 +429,12 @@
             </div> -->
             <div id="1915125657" class="ad-unit" style="margin: 20px auto; text-align: center;"></div>
             <script>
-            window.msAdsQueue.push(function(){
-                window.mmnow.render({
-                adUnitId: 1915125657,
-                elementId: 1915125657
+                window.msAdsQueue.push(function () {
+                    window.mmnow.render({
+                        adUnitId: 1915125657,
+                        elementId: 1915125657
+                    });
                 });
-            });
             </script>
             <section id="formatter">
                 <h2>JSON Formatter</h2>
@@ -592,12 +634,12 @@
             </div> -->
             <div id="1079560242" class="ad-unit"></div>
             <script>
-            window.msAdsQueue.push(function(){
-                window.mmnow.render({
-                adUnitId: 1079560242,
-                elementId: 1079560242
+                window.msAdsQueue.push(function () {
+                    window.mmnow.render({
+                        adUnitId: 1079560242,
+                        elementId: 1079560242
+                    });
                 });
-            });
             </script>
         </div>
     </div>
@@ -632,12 +674,12 @@
 
         <div id="1051564541" class="ad-unit" style="margin-top: 20px; text-align: center;"></div>
         <script>
-        window.msAdsQueue.push(function(){
-            window.mmnow.render({
-            adUnitId: 1051564541,
-            elementId: 1051564541
+            window.msAdsQueue.push(function () {
+                window.mmnow.render({
+                    adUnitId: 1051564541,
+                    elementId: 1051564541
+                });
             });
-        });
         </script>
     </footer>
 

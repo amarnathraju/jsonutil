@@ -4,6 +4,18 @@ const emailDomain = "jsonutil.com";
 const emailLink = `<a href="mailto:${emailUser}@${emailDomain}">${emailUser}@${emailDomain}</a>`;
 document.getElementById("contact-email").innerHTML = emailLink;
 
+function toggleDetails(str) {
+    const details = document.getElementById(str + 'Details');
+    const button = document.getElementById(str + 'ToggleDetails');
+    if (details.style.display === 'none') {
+        details.style.display = 'block';
+        button.textContent = '[See less]';
+    } else {
+        details.style.display = 'none';
+        button.textContent = '[See more]';
+    }
+}
+
 function validateJSON() {
     const jsonInput = document.getElementById('jsonInput').value;
     const resultElement = document.getElementById('result');

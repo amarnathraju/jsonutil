@@ -410,6 +410,138 @@
         </div>
 
         <div class="main-content">
+
+            <section id="jsonFixer">
+                <style>
+                    body {
+                      font-family: Arial, sans-serif;
+                      margin: 20px;
+                    }
+                    textarea {
+                      width: 100%;
+                      height: 150px;
+                      margin-bottom: 10px;
+                    }
+
+                    .correction {
+                        display: block;
+                        font-size: 12px;
+                        margin-bottom: 5px;
+                        border-bottom: 1px solid #ddd;
+                        padding: 5px;
+                        }
+                        .highlight {
+                        background-color: #fffa65;
+                        padding: 2px;
+                        margin: 0 2px;
+                        }
+                        .remove-btn {
+                        background: red;
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        font-size: 12px;
+                        width: 20px;
+                        height: 20px;
+                        float: right;
+                        }
+                        #fixesContainer {
+                        border: 1px solid #ccc;
+                        padding: 5px;
+                        background: #f9f9f9;
+                        max-height: 150px;
+                        overflow-y: auto;
+                        }
+
+                  </style>
+
+<section id="jsonFixer">
+    <h2>JSON Fixer</h2>
+    <p>
+      The JSON Fixer identifies and corrects common issues in malformed JSON strings, making them valid and usable.
+    </p>
+    <button id="jsonFixerToggleDetails" class="toggleDetails" onclick="toggleDetails('jsonFixer')">[See more]</button>
+    <div id="jsonFixerDetails" class="details" style="display: none;">
+      <h3>Why Use the JSON Fixer?</h3>
+      <ul>
+        <li>Automatically identify issues such as missing quotes, single quotes, or trailing commas.</li>
+        <li>Handle unclosed strings and unmatched braces or brackets.</li>
+        <li>Interactively review and approve corrections before applying them.</li>
+        <li>Ensure your JSON is valid for use in APIs, debugging, or data parsing.</li>
+      </ul>
+      <h3>Example Test Cases:</h3>
+      
+      <h4>Case 1: Missing Closing Braces</h4>
+      <h5>Input:</h5>
+      <pre>{ "key1": "value1", "key2": "value2"</pre>
+      <h5>Output:</h5>
+      <pre>
+        {
+            "key1": "value1",
+            "key2": "value2"
+        }
+      </pre>
+      
+      <h4>Case 2: Unclosed Strings</h4>
+      <h5>Input:</h5>
+      <pre>{ "key1": "value1", "key2": "value }</pre>
+      <h5>Output:</h5>
+      <pre>
+        {
+            "key1": "value1",
+            "key2": "value"
+        }
+      </pre>
+      
+      <h4>Case 3: Single Quotes Instead of Double Quotes</h4>
+      <h5>Input:</h5>
+      <pre>{ 'key1': 'value1', 'key2': 'value2' }</pre>
+      <h5>Output:</h5>
+      <pre>
+        {
+            "key1": "value1",
+            "key2": "value2"
+        }
+      </pre>
+      
+      <h4>Case 4: Trailing Comma</h4>
+      <h5>Input:</h5>
+      <pre>{ "key1": "value1", "key2": "value2", }</pre>
+      <h5>Output:</h5>
+      <pre>
+        {
+            "key1": "value1",
+            "key2": "value2"
+        }
+      </pre>
+      
+      <h4>Case 5: Combination of Issues</h4>
+      <h5>Input:</h5>
+      <pre>{ 'key1': 'value1', "key2": "value2", "key3": "value }</pre>
+      <h5>Output:</h5>
+      <pre>
+        {
+            "key1": "value1",
+            "key2": "value2",
+            "key3": "value"
+        }
+      </pre>
+    </div>
+    <textarea id="jsonFixerInput" rows="8" placeholder="Enter your malformed JSON here..."></textarea>
+    <button onclick="processJSON()">Fix JSON</button>
+    <h3>Fixed JSON:</h3>
+    <div class="output-container">
+      <button class="copyButton" onclick="copyToClipboard('fixedJSON')">Copy</button>
+      <pre class="generatedText" id="fixedJSON"></pre>
+    </div>
+    <h3>Proposed Fixes:</h3>
+    <div id="fixesContainer" style="border: 1px solid #ccc; padding: 5px; background: #f9f9f9; max-height: 150px; overflow-y: auto;"></div>
+  </section>
+  
+
+              </section>
+
             <section id="validator">
                 <h2>JSON Validator</h2>
                 <p>

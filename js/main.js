@@ -4,6 +4,142 @@ const emailDomain = "jsonutil.com";
 const emailLink = `<a href="mailto:${emailUser}@${emailDomain}">${emailUser}@${emailDomain}</a>`;
 document.getElementById("contact-email").innerHTML = emailLink;
 
+
+function processJSON() {
+    const input = document.getElementById('jsonFixerInput').value;
+    const fixesContainer = document.getElementById('fixesContainer');
+    const outputJsonContainer = document.getElementById('fixedJSON');
+  
+    // Reset UI
+    fixesContainer.innerHTML = '';
+    outputJsonContainer.textContent = '';
+  
+    let fixedString = input;
+    const corrections = [];
+    let iterationCount = 0;
+  
+    // Apply fixes iteratively up to 10 times
+    while (iterationCount < 10) {
+      const originalString = fixedString;
+  
+      // Step 1: Replace single quotes with double quotes for keys and values
+      fixedString = fixedString.replace(/'([^']*)'/g, (match, p1, offset) => {
+        corrections.push({
+          description: `Replaced single quotes around "${p1}" with double quotes.`,
+          original: match,
+          fixed: `"${p1}"`,
+          offset,
+        });
+        return `"${p1}"`;
+      });
+  
+      // Step 2: Add missing quotes around unquoted keys
+      fixedString = fixedString.replace(/(\b[a-zA-Z_]\w*\b)(?=\s*:)/g, (match, offset) => {
+        corrections.push({
+          description: `Added quotes around key "${match}".`,
+          original: match,
+          fixed: `"${match}"`,
+          offset,
+        });
+        return `"${match}"`;
+      });
+  
+      // Step 3: Fix unclosed strings and trailing invalid characters
+      fixedString = fixedString.replace(/"([^"]*)([^"]*)$/, (match, p1, p2, offset) => {
+        const cleanedValue = p1.replace(/[^a-zA-Z0-9\s]/g, '').trim(); // Remove invalid characters
+        corrections.push({
+          description: `Closed unclosed string starting at position ${offset}.`,
+          original: match,
+          fixed: `"${cleanedValue}"`,
+          offset,
+        });
+        return `"${cleanedValue}"`;
+      });
+  
+      // Step 4: Remove trailing commas
+      fixedString = fixedString.replace(/,\s*([}\]])/g, (match, p1, offset) => {
+        corrections.push({
+          description: `Removed trailing comma before "${p1}".`,
+          original: match,
+          fixed: p1,
+          offset,
+        });
+        return p1;
+      });
+  
+      // Step 5: Balance braces and brackets
+      const unclosedFix = fixUnclosedBracesOrBrackets(fixedString);
+      if (unclosedFix.added) {
+        corrections.push({
+          description: `Added missing closing braces or brackets.`,
+          original: '',
+          fixed: unclosedFix.added,
+          offset: fixedString.length,
+        });
+        fixedString += unclosedFix.added;
+      }
+  
+      // Stop if no changes were made
+      if (originalString === fixedString) break;
+  
+      iterationCount++;
+    }
+  
+    // Display corrections
+    corrections.forEach((correction, index) => {
+      const correctionElement = document.createElement('div');
+      correctionElement.className = 'correction';
+      correctionElement.innerHTML = `
+        <p><strong>Fix:</strong> ${correction.description}</p>
+        <p><strong>Original:</strong> <code>${correction.original}</code></p>
+        <p><strong>Fixed:</strong> <code>${correction.fixed}</code></p>
+      `;
+      fixesContainer.appendChild(correctionElement);
+    });
+  
+    // Validate final JSON
+    try {
+      const parsedJSON = JSON.parse(fixedString);
+      outputJsonContainer.textContent = JSON.stringify(parsedJSON, null, 2);
+    } catch (error) {
+      outputJsonContainer.textContent = `Error: Unable to parse JSON. Please review the corrections or fix manually.`;
+      console.error('Parsing Error:', error.message);
+      console.error('Malformed JSON Input:', fixedString);
+    }
+  }
+  
+  // Helper function to balance braces and brackets
+  function fixUnclosedBracesOrBrackets(jsonStr) {
+    const openBraces = { '{': '}', '[': ']' };
+    const closeBraces = { '}': '{', ']': '[' };
+    const stack = [];
+    const additions = [];
+  
+    for (const char of jsonStr) {
+      if (openBraces[char]) {
+        stack.push(char);
+      } else if (closeBraces[char]) {
+        if (stack.length > 0 && stack[stack.length - 1] === closeBraces[char]) {
+          stack.pop();
+        } else {
+          return { added: '', valid: false };
+        }
+      }
+    }
+  
+    while (stack.length > 0) {
+      const openBrace = stack.pop();
+      additions.push(openBraces[openBrace]);
+    }
+  
+    return { added: additions.join(''), valid: true };
+  }
+    
+
+
+
+
+
 function toggleDetails(str) {
     const details = document.getElementById(str + 'Details');
     const button = document.getElementById(str + 'ToggleDetails');

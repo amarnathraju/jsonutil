@@ -354,6 +354,7 @@
 
     <nav class="navigation-banner">
         <a href="#validator">Validator</a>
+        <a href="#fixer">Fixer</a>
         <a href="#formatter">Formatter</a>
         <a href="#minifier">Minifier</a>
         <a href="#json-to-xml">JSON to XML</a>
@@ -468,6 +469,91 @@
                     });
                 });
             </script>
+
+            <section id="fixer">
+                <h2>JSON Fixer</h2>
+                <p>
+                    The JSON Fixer identifies and corrects common issues in malformed JSON strings, making them
+                    valid and usable.
+                </p>
+                <button id="fixerToggleDetails" class="toggleDetails" onclick="toggleDetails('fixer')">[See
+                    more]</button>
+                <div id="fixerDetails" class="details" style="display: none;">
+                    <h3>Why Use the JSON Fixer?</h3>
+                    <ul>
+                        <li>Automatically identify issues such as missing quotes, single quotes, or trailing commas.
+                        </li>
+                        <li>Handle unclosed strings and unmatched braces or brackets.</li>
+                        <li>Interactively review and approve corrections before applying them.</li>
+                        <li>Ensure your JSON is valid for use in APIs, debugging, or data parsing.</li>
+                    </ul>
+                    <h3>Example Test Cases:</h3>
+
+                    <h4>Case 1: Missing Closing Braces</h4>
+                    <h5>Input:</h5>
+                    <pre>{ "key1": "value1", "key2": "value2"</pre>
+                    <h5>Output:</h5>
+                    <pre>
+                        {
+                            "key1": "value1",
+                            "key2": "value2"
+                        }
+                    </pre>
+
+                    <h4>Case 2: Unclosed Strings</h4>
+                    <h5>Input:</h5>
+                    <pre>{ "key1": "value1", "key2": "value}</pre>
+                    <h5>Output:</h5>
+                    <pre>
+                        {
+                            "key1": "value1",
+                            "key2": "value"
+                        }
+                    </pre>
+
+                    <h4>Case 3: Single Quotes Instead of Double Quotes</h4>
+                    <h5>Input:</h5>
+                    <pre>{ 'key1': 'value1', 'key2': 'value2' }</pre>
+                    <h5>Output:</h5>
+                    <pre>
+                        {
+                            "key1": "value1",
+                            "key2": "value2"
+                        }
+                    </pre>
+
+                    <h4>Case 4: Trailing Comma</h4>
+                    <h5>Input:</h5>
+                    <pre>{ "key1": "value1", "key2": "value2", }</pre>
+                    <h5>Output:</h5>
+                    <pre>
+                        {
+                            "key1": "value1",
+                            "key2": "value2"
+                        }
+                    </pre>
+
+                    <h4>Case 5: Combination of Issues</h4>
+                    <h5>Input:</h5>
+                    <pre>{ 'key1': 'value1', "key2": "value2", "key3": "value}</pre>
+                    <h5>Output:</h5>
+                    <pre>
+                        {
+                            "key1": "value1",
+                            "key2": "value2",
+                            "key3": "value"
+                        }
+                    </pre>
+                </div>
+                <textarea id="fixerInput" rows="8" placeholder="Enter your malformed JSON here..."></textarea>
+                <button onclick="fixJSON()">Fix JSON</button>
+                <h3>Fixed JSON:</h3>
+                <div class="output-container">
+                    <button class="copyButton" onclick="copyToClipboard('fixedJSON')">Copy</button>
+                    <pre class="generatedText" id="fixedJSON"></pre>
+                </div>
+            </section>
+
             <section id="formatter">
                 <h2>JSON Formatter</h2>
                 <p>

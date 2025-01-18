@@ -4,6 +4,75 @@ const emailDomain = "jsonutil.com";
 const emailLink = `<a href="mailto:${emailUser}@${emailDomain}">${emailUser}@${emailDomain}</a>`;
 document.getElementById("contact-email").innerHTML = emailLink;
 
+function fixJSON() {
+  const input = document.getElementById('fixerInput').value;
+  const outputJsonContainer = document.getElementById('fixedJSON');
+
+  outputJsonContainer.textContent = '';
+
+  let fixedString = input;
+  let iterationCount = 0;
+
+  while (iterationCount < 10) {
+    const originalString = fixedString;
+
+    // Step 1: Replace single quotes with double quotes for keys and values
+    fixedString = fixedString.replace(/'([^']*)'/g, (match, p1) => {
+      return `"${p1}"`;
+    });
+
+    // Step 2: Add missing quotes around unquoted keys (allow spaces before the colon)
+    fixedString = fixedString.replace(/(\b[a-zA-Z_]\w*\b)\s*:(?!")/g, (match, p1) => {
+      return `"${p1}":`;
+    });
+
+    // Step 3: Fix unclosed strings and remove trailing invalid characters
+    fixedString = fixedString.replace(
+      /(": "([^"]*?))[^a-zA-Z0-9\s}]*}/,
+      (match, p1) => `${p1}"`
+    );
+
+    // Step 4: Remove trailing commas
+    fixedString = fixedString.replace(/,\s*([}\]])/g, (match, p1) => p1);
+
+    // Step 5: Fix unmatched braces or brackets
+    const stack = [];
+    const additions = [];
+    for (const char of fixedString) {
+      if (char === '{' || char === '[') {
+        stack.push(char);
+      } else if (char === '}' || char === ']') {
+        if (
+          stack.length > 0 &&
+          ((char === '}' && stack[stack.length - 1] === '{') ||
+            (char === ']' && stack[stack.length - 1] === '['))
+        ) {
+          stack.pop();
+        }
+      }
+    }
+    while (stack.length > 0) {
+      const openBrace = stack.pop();
+      additions.push(openBrace === '{' ? '}' : ']');
+    }
+    fixedString += additions.join('');
+
+    // Stop if no changes were made
+    if (originalString === fixedString) break;
+
+    iterationCount++;
+  }
+
+  try {
+    const parsedJSON = JSON.parse(fixedString);
+    outputJsonContainer.textContent = JSON.stringify(parsedJSON, null, 2);
+  } catch (error) {
+    outputJsonContainer.textContent = `Error: Unable to parse JSON. Please review the corrections or fix manually.`;
+    console.error('Parsing Error:', error.message);
+    console.error('Malformed JSON Input:', fixedString);
+  }
+}
+
 function toggleDetails(str) {
     const details = document.getElementById(str + 'Details');
     const button = document.getElementById(str + 'ToggleDetails');
